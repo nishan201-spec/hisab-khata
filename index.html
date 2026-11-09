@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d3150"><meta name="description" content="ব্যক্তিগত আয়, ব্যয়, দেনা ও পাওনার অফলাইন হিসাব">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icons/icon-512.png">
+<title>হিসাব খাতা</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand"><img src="icons/icon-512.png" alt="হিসাব খাতা"><div><b>হিসাব খাতা</b><small>আপনার দৈনিক হিসাব</small></div></div><button id="installBtn" class="install" hidden>ইনস্টল</button></header>
+<main>
+<section id="home" class="page active">
+  <div class="welcome"><div><span class="muted" id="todayLabel"></span><h1>আজকের হিসাব</h1></div><span class="offline">● অফলাইন</span></div>
+  <div class="hero-grid">
+    <article class="stat income"><span>আজকের আয়</span><strong id="todayIncome">৳০</strong><small>আজ মোট জমা</small></article>
+    <article class="stat expense"><span>আজকের ব্যয়</span><strong id="todayExpense">৳০</strong><small>আজ মোট খরচ</small></article>
+  </div>
+  <div class="section-head"><h2>দ্রুত যোগ করুন</h2></div>
+  <div class="quick-grid">
+    <button data-add="income">＋ আয় যোগ</button><button data-add="expense">＋ ব্যয় যোগ</button>
+    <button data-add="debt">＋ দেনা যোগ</button><button data-add="receivable">＋ পাওনা যোগ</button>
+  </div>
+  <div class="section-head"><h2>আজকের লেনদেন</h2><span class="muted">সর্বশেষ আগে</span></div>
+  <div id="todayList" class="list empty">আজ এখনো কোনো লেনদেন যোগ করা হয়নি।</div>
+  <div class="section-head"><h2>মোট বাকি</h2></div>
+  <div class="balance-grid"><div><small>দেনা বাকি</small><b id="debtTotal">৳০</b></div><div><small>পাওনা বাকি</small><b id="receivableTotal">৳০</b></div></div>
+</section>
+<section id="income" class="page"><div class="page-title"><h1>আয়ের হিসাব</h1></div><div class="month-summary"><div><small>এই মাসের আয়</small><b id="incomeMonth">৳০</b></div><div><small>এই মাসের ব্যয়</small><b id="incomeExpenseMonth">৳০</b></div></div><button class="primary full" data-add="income">＋ নতুন আয় যোগ করুন</button><div id="incomeList" class="list"></div></section>
+<section id="expense" class="page"><div class="page-title"><h1>ব্যয়ের হিসাব</h1></div><div class="month-summary"><div><small>এই মাসের আয়</small><b id="expenseIncomeMonth">৳০</b></div><div><small>এই মাসের ব্যয়</small><b id="expenseMonth">৳০</b></div></div><button class="primary full" data-add="expense">＋ নতুন ব্যয় যোগ করুন</button><div id="expenseList" class="list"></div></section>
+<section id="debt" class="page"><div class="page-title"><h1>দেনার হিসাব</h1></div><div class="month-summary"><div><small>এই মাসের আয়</small><b id="debtIncomeMonth">৳০</b></div><div><small>এই মাসের ব্যয়</small><b id="debtExpenseMonth">৳০</b></div></div><div class="total-strip"><span>মোট দেনা বাকি</span><b id="debtPageTotal">৳০</b></div><button class="primary full" data-add="debt">＋ নতুন দেনা যোগ করুন</button><div id="debtList" class="list"></div></section>
+<section id="receivable" class="page"><div class="page-title"><h1>পাওনার হিসাব</h1></div><div class="month-summary"><div><small>এই মাসের আয়</small><b id="recvIncomeMonth">৳০</b></div><div><small>এই মাসের ব্যয়</small><b id="recvExpenseMonth">৳০</b></div></div><div class="total-strip"><span>মোট পাওনা বাকি</span><b id="recvPageTotal">৳০</b></div><button class="primary full" data-add="receivable">＋ নতুন পাওনা যোগ করুন</button><div id="receivableList" class="list"></div></section>
+<section id="settings" class="page"><div class="page-title"><h1>সেটিংস ও ব্যাকআপ</h1></div><div class="settings-card"><h3>আপনার হিসাবের নিরাপত্তা</h3><p>ডেটা এই ডিভাইসের ব্রাউজারে অফলাইনে সংরক্ষিত থাকে। ফোন বদলানোর আগে ব্যাকআপ ডাউনলোড করে রাখুন।</p><button class="primary full" id="exportBtn">ব্যাকআপ ডাউনলোড</button><label class="file-label">ব্যাকআপ ফিরিয়ে আনুন<input type="file" id="importFile" accept="application/json"></label><p class="muted tiny">এই সংস্করণে ফোন ও ল্যাপটপের মধ্যে স্বয়ংক্রিয় সিঙ্ক নেই। আলাদা ডিভাইসে ব্যাকআপ Export/Import করতে হবে।</p></div></section>
+</main>
+<nav class="bottom-nav">
+<button class="nav active" data-page="home"><span>⌂</span>হোম</button><button class="nav" data-page="income"><span>↗</span>আয়</button><button class="nav" data-page="expense"><span>↘</span>ব্যয়</button><button class="nav" data-page="debt"><span>−</span>দেনা</button><button class="nav" data-page="receivable"><span>＋</span>পাওনা</button><button class="nav" data-page="settings"><span>⚙</span>আরও</button>
+</nav>
+<div class="modal" id="entryModal" aria-hidden="true"><div class="sheet"><div class="sheet-head"><h2 id="formTitle">নতুন হিসাব</h2><button class="close" id="closeModal">×</button></div><form id="entryForm">
+<input type="hidden" id="entryType"><label>টাকার পরিমাণ (৳)<input id="amount" type="number" min="0.01" step="0.01" required placeholder="যেমন ৫০০"></label>
+<label id="categoryWrap">ক্যাটাগরি<input id="category" required placeholder="যেমন কাজের মজুরি, খাবার, বাজার"></label>
+<div id="personFields"><label>নাম<input id="person" placeholder="ব্যক্তির নাম"></label><label>গ্রাম<input id="village" placeholder="গ্রামের নাম"></label><label>ফোন নম্বর<input id="phone" inputmode="tel" placeholder="ফোন নম্বর"></label></div>
+<label>তারিখ<input id="date" type="date" required></label><label>নোট (ঐচ্ছিক)<textarea id="note" rows="2" placeholder="অতিরিক্ত কিছু লিখতে চাইলে"></textarea></label>
+<label>ছবি (ঐচ্ছিক)<input id="photo" type="file" accept="image/*" capture="environment"></label><div id="photoPreview"></div>
+<button class="primary full" type="submit">হিসাব সংরক্ষণ করুন</button></form></div></div>
+<div class="modal" id="payModal" aria-hidden="true"><div class="sheet"><div class="sheet-head"><h2>টাকা পরিশোধ</h2><button class="close" id="closePay">×</button></div><form id="payForm"><input type="hidden" id="payId"><p id="payInfo"></p><label>কত টাকা পরিশোধ হলো?<input id="payAmount" type="number" min="0.01" step="0.01" required></label><button class="primary full">পরিশোধ সংরক্ষণ</button></form></div></div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body></html>
